@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Onesoftdev.IdentityServer.Quickstart.AspNetUsers.Models
+namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Models
 {
     public class AspNetUser
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Onesoftdev.IdentityServer.Quickstart.AspNetUsers.Models
+namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Models
 {
     public class AspNetUserInput
     {
