@@ -53,7 +53,7 @@ namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Controllers
                 return BadRequest(ModelState);
 
             // Check whether 'UsernameType' (AspNetUserNameType) is correct. Should be
-            // 'email' or 'mobile' only.
+            // 'email' or 'phone' only.
             if (aspNetUserInput.UsernameType != AspNetUserNameType.EMAIL &&
                 aspNetUserInput.UsernameType != AspNetUserNameType.PHONE)
             {
@@ -82,15 +82,16 @@ namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Controllers
                 if (!RegexUtilities.IsValidSAPhoneNumber(aspNetUserInput.Username))
                 {
                     ModelState.AddModelError(nameof(aspNetUserInput.UsernameType),
-                        "Mobile number input is invalid.");
+                        "Phone number input is invalid.");
                     return BadRequest(ModelState);
                 }
 
                 user.PhoneNumber = aspNetUserInput.Username;
             }
 
+            // Check if the supplied username already exists.
             if (await _userManager.FindByNameAsync(aspNetUserInput.Username) != null)
-                return Conflict($"'{aspNetUserInput.Username}' is already in use.");
+                return Conflict($"Username: '{aspNetUserInput.Username}' is already in use.");
 
             var result = await _userManager.CreateAsync(user, aspNetUserInput.Password);
 
@@ -112,7 +113,7 @@ namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Controllers
                 {
                     var encodedCallbackUrl = HtmlEncoder.Default.Encode(callbackUrl);
                     _emailService.SendEmail(aspNetUserInput.Username,
-                        string.Format("Please confirm your account by <a href=\"{0}\">clicking here</a>.",
+                        string.Format("Please confirm your account by clicking on the following link: {0}",
                         encodedCallbackUrl));
                 }
                 catch(Exception ex)
@@ -190,90 +191,93 @@ namespace Onesoftdev.IdentityServer.OsfCustom.AspNetUsers.Controllers
             return NoContent();
         }
 
-        [AllowAnonymous]
-        [HttpPut]
-        [Route("{id}", Name = "UpdateUser")]
-        public async Task<IActionResult> UpdateUser(string id, 
-            [FromBody] AspNetUserUpdate aspNetUserUpdate)
-        {
-            // Could use automapper to update the AspNetUser entity but manual will do fine :-).
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-                return NotFound();
+        // IDP level changes should not be allowed. Once a user has registered, their email or phone number becomes their username
+        // and cannot be changed again. Any changes to email address or phone number need to be done on an application level.
 
-            bool anyChange = false;
-            bool emailChanged = false;
+        //[AllowAnonymous]
+        //[HttpPut]
+        //[Route("{id}", Name = "UpdateUser")]
+        //public async Task<IActionResult> UpdateUser(string id, 
+        //    [FromBody] AspNetUserUpdate aspNetUserUpdate)
+        //{
+        //    // Could use automapper to update the AspNetUser entity but manual will do fine :-).
+        //    var user = await _userManager.FindByIdAsync(id);
+        //    if (user == null)
+        //        return NotFound();
 
-            if (user.Email != aspNetUserUpdate.Email)
-            {
-                anyChange = true;
-                user.Email = aspNetUserUpdate.Email;
-                emailChanged = true;
-            }
+        //    bool anyChange = false;
+        //    bool emailChanged = false;
 
-            if (user.PhoneNumber != aspNetUserUpdate.PhoneNumber)
-            {
-                anyChange = true;
-                user.PhoneNumber = aspNetUserUpdate.PhoneNumber;
-            }
+        //    if (user.Email != aspNetUserUpdate.Email)
+        //    {
+        //        anyChange = true;
+        //        user.Email = aspNetUserUpdate.Email;
+        //        emailChanged = true;
+        //    }
 
-            if (!anyChange)
-                return BadRequest();
+        //    if (user.PhoneNumber != aspNetUserUpdate.PhoneNumber)
+        //    {
+        //        anyChange = true;
+        //        user.PhoneNumber = aspNetUserUpdate.PhoneNumber;
+        //    }
 
-            await _userManager.UpdateAsync(user);
+        //    if (!anyChange)
+        //        return BadRequest();
 
-            if (emailChanged)
-                await _userManager.UpdateNormalizedEmailAsync(user);
+        //    await _userManager.UpdateAsync(user);
 
-            return NoContent();
-        }
+        //    if (emailChanged)
+        //        await _userManager.UpdateNormalizedEmailAsync(user);
 
-        [AllowAnonymous]
-        [HttpPatch]
-        [Route("{id}", Name = "PartiallyUpdateUser")]
-        public async Task<IActionResult> PartiallyUpdateUser(string id, 
-            [FromBody] JsonPatchDocument<AspNetUserUpdate> patchDoc)
-        {
-            if (patchDoc == null)
-                return BadRequest();
+        //    return NoContent();
+        //}
 
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-                return NotFound();
+        //[AllowAnonymous]
+        //[HttpPatch]
+        //[Route("{id}", Name = "PartiallyUpdateUser")]
+        //public async Task<IActionResult> PartiallyUpdateUser(string id, 
+        //    [FromBody] JsonPatchDocument<AspNetUserUpdate> patchDoc)
+        //{
+        //    if (patchDoc == null)
+        //        return BadRequest();
 
-            AspNetUserUpdate aspNetUserUpdate = new AspNetUserUpdate();
+        //    var user = await _userManager.FindByIdAsync(id);
+        //    if (user == null)
+        //        return NotFound();
 
-            patchDoc.ApplyTo(aspNetUserUpdate);
-            TryValidateModel(aspNetUserUpdate);
+        //    AspNetUserUpdate aspNetUserUpdate = new AspNetUserUpdate();
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //    patchDoc.ApplyTo(aspNetUserUpdate);
+        //    TryValidateModel(aspNetUserUpdate);
 
-            bool anyChange = false;
-            bool emailChanged = false;
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            if (user.Email != aspNetUserUpdate.Email)
-            {
-                anyChange = true;
-                user.Email = aspNetUserUpdate.Email;
-                emailChanged = true;
-            }
+        //    bool anyChange = false;
+        //    bool emailChanged = false;
 
-            if (user.PhoneNumber != aspNetUserUpdate.PhoneNumber)
-            {
-                anyChange = true;
-                user.PhoneNumber = aspNetUserUpdate.PhoneNumber;
-            }
+        //    if (user.Email != aspNetUserUpdate.Email)
+        //    {
+        //        anyChange = true;
+        //        user.Email = aspNetUserUpdate.Email;
+        //        emailChanged = true;
+        //    }
 
-            if (!anyChange)
-                return BadRequest();
+        //    if (user.PhoneNumber != aspNetUserUpdate.PhoneNumber)
+        //    {
+        //        anyChange = true;
+        //        user.PhoneNumber = aspNetUserUpdate.PhoneNumber;
+        //    }
 
-            await _userManager.UpdateAsync(user);
+        //    if (!anyChange)
+        //        return BadRequest();
 
-            if (emailChanged)
-                await _userManager.UpdateNormalizedEmailAsync(user);
+        //    await _userManager.UpdateAsync(user);
 
-            return NoContent();
-        }
+        //    if (emailChanged)
+        //        await _userManager.UpdateNormalizedEmailAsync(user);
+
+        //    return NoContent();
+        //}
     }
 }

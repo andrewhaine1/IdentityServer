@@ -2929,3 +2929,60 @@ System.NotSupportedException: No IUserTwoFactorTokenProvider<TUser> named 'Oneso
 2019-04-09 23:31:01.658 +02:00 [DBG] Getting claims for access token for subject: 88ab8672-9b0f-4fd8-8d3c-64ed9d71364e
 2019-04-09 23:31:01.909 +02:00 [INF] {"ClientId":"client","ClientName":"Client Credentials Client","RedirectUri":null,"Endpoint":"Token","SubjectId":"88ab8672-9b0f-4fd8-8d3c-64ed9d71364e","Scopes":"webapi","GrantType":"password","Tokens":[{"TokenType":"access_token","TokenValue":"****c-FA","$type":"Token"}],"Category":"Token","Name":"Token Issued Success","EventType":"Success","Id":2000,"Message":null,"ActivityId":"0HLLT6AG06RFV:00000002","TimeStamp":"2019-04-09T21:31:01.0000000Z","ProcessId":16740,"LocalIpAddress":"127.0.0.1:45341","RemoteIpAddress":"::1","$type":"TokenIssuedSuccessEvent"}
 2019-04-09 23:31:01.912 +02:00 [DBG] Token request success.
+2019-04-10 16:50:13.052 +02:00 [DBG] Augmenting SignInContext
+2019-04-10 16:50:13.057 +02:00 [DBG] Adding idp claim with value: local
+2019-04-10 16:50:13.057 +02:00 [DBG] Adding amr claim with value: pwd
+2019-04-10 16:50:13.057 +02:00 [DBG] Adding auth_time claim with value: 1554907813
+2019-04-10 16:50:13.073 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2019-04-10 17:13:38.897 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-04-10 17:13:38.931 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-04-10 17:13:38.933 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-04-10 17:13:38.933 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-04-10 17:13:38.933 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-04-10 17:13:38.933 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-04-10 17:13:38.934 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-04-10 17:13:39.387 +02:00 [DBG] Login Url: /Account/Login
+2019-04-10 17:13:39.389 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-04-10 17:13:39.389 +02:00 [DBG] Logout Url: /Account/Logout
+2019-04-10 17:13:39.389 +02:00 [DBG] ConsentUrl Url: /consent
+2019-04-10 17:13:39.389 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-04-10 17:13:39.389 +02:00 [DBG] Error Url: /home/error
+2019-04-10 17:13:39.389 +02:00 [DBG] Error Id Parameter: errorId
+2019-04-10 17:15:06.634 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-04-10 17:15:06.668 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-04-10 17:15:06.671 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-04-10 17:15:06.671 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-04-10 17:15:06.671 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-04-10 17:15:06.671 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-04-10 17:15:06.671 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-04-10 17:15:06.988 +02:00 [DBG] Login Url: /Account/Login
+2019-04-10 17:15:06.990 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-04-10 17:15:06.990 +02:00 [DBG] Logout Url: /Account/Logout
+2019-04-10 17:15:06.990 +02:00 [DBG] ConsentUrl Url: /consent
+2019-04-10 17:15:06.990 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-04-10 17:15:06.990 +02:00 [DBG] Error Url: /home/error
+2019-04-10 17:15:06.990 +02:00 [DBG] Error Id Parameter: errorId
+2019-04-10 17:15:32.205 +02:00 [DBG] Augmenting SignInContext
+2019-04-10 17:15:32.207 +02:00 [DBG] Adding idp claim with value: local
+2019-04-10 17:15:32.207 +02:00 [DBG] Adding amr claim with value: pwd
+2019-04-10 17:15:32.208 +02:00 [DBG] Adding auth_time claim with value: 1554909332
+2019-04-10 17:15:32.219 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2019-04-10 17:16:27.100 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-04-10 17:16:27.132 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-04-10 17:16:27.135 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-04-10 17:16:27.135 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-04-10 17:16:27.135 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-04-10 17:16:27.135 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-04-10 17:16:27.135 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-04-10 17:16:27.467 +02:00 [DBG] Login Url: /Account/Login
+2019-04-10 17:16:27.469 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-04-10 17:16:27.469 +02:00 [DBG] Logout Url: /Account/Logout
+2019-04-10 17:16:27.469 +02:00 [DBG] ConsentUrl Url: /consent
+2019-04-10 17:16:27.469 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-04-10 17:16:27.469 +02:00 [DBG] Error Url: /home/error
+2019-04-10 17:16:27.469 +02:00 [DBG] Error Id Parameter: errorId
+2019-04-10 17:16:33.470 +02:00 [DBG] Augmenting SignInContext
+2019-04-10 17:16:33.473 +02:00 [DBG] Adding idp claim with value: local
+2019-04-10 17:16:33.473 +02:00 [DBG] Adding amr claim with value: pwd
+2019-04-10 17:16:33.473 +02:00 [DBG] Adding auth_time claim with value: 1554909393
+2019-04-10 17:16:33.484 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
